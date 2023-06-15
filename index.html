@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Ferramentas Advocacia</title>
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #message {
+      margin-top: 10px;
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+</head>
+
+<body>
+  <h1>Ferramentas Alcaraz Murillo Advocacia</h1>
+
+  <form action="javascript:;" onsubmit="setAction(this)">
+    <div>
+      <label>Número de parcelas:</label>
+      <input name="nParcelas" type="text">
+      <br/>
+      <label>Data da primeira parcela (dd/mm/aa):</label>
+      <input name="dataInicial" type="text">
+    </div>
+
+    <div>
+      <input type="submit" value="Mostrar parcelas"/>
+    </div>
+  </form>
+
+  <script>
+    function setAction(form) {
+      var data = moment(form.dataInicial.value, "DD/MM/YYYY");
+      var resultado = "";
+
+      for (var num = 1; num <= form.nParcelas.value; num++) {
+        var dataParcela = moment(moment(data).add(num - 1, "months")).format("DD/MM/YYYY");
+        resultado += num + "ᵃ parcela " + dataParcela + " no valor de R$ 350,00 (trezentos e cinquenta reais)\n";
+      }
+
+      document.getElementById("message").value = resultado;
+    }
+  </script>
+</body>
+
+<footer>
+  <textarea id="message"></textarea>
+</footer>
+
+</html>
