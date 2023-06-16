@@ -65,13 +65,11 @@
       const nParcelas = parseInt(form.nParcelas.value);
       const valorParcela = form.valorParcela.value;
       const resultado = [...Array(nParcelas).keys()]
-        .map(mes => {
-          return {
-            parcela: mes + 1,
-            data: moment(moment(dataInicial).add(mes, "months")).format("DD/MM/YYYY")
-          };
-        })
-        .map(({parcela, data}) => parcela + "ᵃ parcela " + data + " no valor de " + valorParcela)
+        .map(mes => ({
+          parcela: mes + 1,
+          data: moment(moment(dataInicial).add(mes, "months")).format("DD/MM/YYYY")
+        }))
+        .map(({ parcela, data }) => parcela + "ᵃ parcela " + data + " no valor de " + valorParcela)
         .join(';\n') + '.';
 
       document.getElementById("message").value = resultado;
